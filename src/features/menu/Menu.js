@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Category } from "../category/Category";
 import { addCategory, selectCategories } from "../menu/menuSlice";
+import { withRouter } from "react-router-dom";
 
-export function Menu() {
+function Menu() {
   const dispatch = useDispatch();
   const categories = useSelector(selectCategories);
   const [newCategory, setNewCategory] = useState("");
@@ -38,3 +39,5 @@ export function Menu() {
     </>
   );
 }
+
+export default withRouter(Menu);
