@@ -1,8 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { login, logout } from "./loginSlice";
+import { login, logout } from "./loginSLice";
 import { loginBackend } from "../login/loginService";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 export function Login() {
   const dispatch = useDispatch();
@@ -29,6 +30,8 @@ export function Login() {
             email: loginName,
             password: loginPassword,
           });
+
+          axios.defaults.headers.common = { Authorization: `bearer ${token}` };
           dispatch(login(token));
           if (token) {
             history.push("/restaurants");

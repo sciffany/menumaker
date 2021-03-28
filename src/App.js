@@ -5,7 +5,7 @@ import Menu from "./features/menu/Menu";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import ProtectedRoute from "./app/ProtectedRoute";
 import { Login } from "./features/login/login";
-import { selectIsAuth } from "./features/login/loginSlice";
+import { selectIsAuth } from "./features/login/loginSLice";
 import Restaurant from "./features/restaurants/Restaurant";
 
 function App() {
@@ -26,6 +26,7 @@ function App() {
             ></ProtectedRoute>
             <ProtectedRoute
               isAuth={isAuth}
+              exact
               path="/restaurants"
               component={Restaurant}
             ></ProtectedRoute>
