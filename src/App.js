@@ -7,7 +7,7 @@ import ProtectedRoute from "./app/ProtectedRoute";
 import { Login } from "./features/login/login";
 import { selectIsAuth } from "./features/login/loginSlice";
 import Restaurants from "./features/restaurants/Restaurants";
-import { Signup } from "./features/signup/signup";
+import { Signup } from "./features/signup/Signup";
 
 function App() {
   const isAuth = useSelector(selectIsAuth);
