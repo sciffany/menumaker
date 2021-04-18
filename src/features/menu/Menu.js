@@ -24,7 +24,7 @@ function Menu() {
   });
 
   return (
-    <>
+    <div>
       Input food category
       <div>
         <input
@@ -36,7 +36,7 @@ function Menu() {
         </button>
       </div>
       <ol>{listOfCategories}</ol>
-    </>
+    </div>
   );
 }
 

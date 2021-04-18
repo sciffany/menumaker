@@ -1,9 +1,18 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { login, logout } from "./loginSLice";
+import { login } from "./loginSlice";
 import { loginBackend } from "../login/loginService";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
+import { Button, message } from "antd";
+import styled from "styled-components";
+
+const LoginWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100px;
+`;
 
 export function Login() {
   const dispatch = useDispatch();
@@ -13,34 +22,40 @@ export function Login() {
   const [loginPassword, setLoginPassword] = React.useState("");
 
   return (
-    <>
-      <h1>Landing page</h1>
-      Login name
+    <LoginWrapper>
+      <h1>Login</h1>
+      Email address
+      <br />
       <input type="text" onChange={(e) => setLoginName(e.target.value)}></input>
       <br />
-      Login password
-      <input
-        type="text"
-        onChange={(e) => setLoginPassword(e.target.value)}
-      ></input>
+      Password
       <br />
-      <button
+      <input type="text" onChange={(e) => setLoginPassword(e.target.value)}></input>
+      <br />
+      <Button
+        type="primary"
         onClick={async () => {
-          const token = await loginBackend({
-            email: loginName,
-            password: loginPassword,
-          });
+          try {
+            const token = await loginBackend({
+              email: loginName,
+              password: loginPassword,
+            });
 
-          axios.defaults.headers.common = { Authorization: `bearer ${token}` };
-          dispatch(login(token));
-          if (token) {
-            history.push("/restaurants");
+            dispatch(login(token));
+            if (token) {
+              history.push("/restaurants");
+            }
+          } catch (error) {
+            message.info("error");
           }
         }}
       >
         Login
-      </button>
-      <button onClick={async () => await dispatch(logout({}))}>Logout</button>
-    </>
+      </Button>
+      <br />
+      <span>
+        New user? <a href="/signup"> Sign up</a>
+      </span>
+    </LoginWrapper>
   );
 }

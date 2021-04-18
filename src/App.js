@@ -5,8 +5,9 @@ import Menu from "./features/menu/Menu";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import ProtectedRoute from "./app/ProtectedRoute";
 import { Login } from "./features/login/login";
-import { selectIsAuth } from "./features/login/loginSLice";
-import Restaurant from "./features/restaurants/Restaurant";
+import { selectIsAuth } from "./features/login/loginSlice";
+import Restaurants from "./features/restaurants/Restaurants";
+import { Signup } from "./features/signup/signup";
 
 function App() {
   const isAuth = useSelector(selectIsAuth);
@@ -19,16 +20,15 @@ function App() {
             <Route path="/" exact>
               <Login />
             </Route>
-            <ProtectedRoute
-              isAuth={isAuth}
-              path="/menu"
-              component={Menu}
-            ></ProtectedRoute>
+            <Route path="/signup" exact>
+              <Signup />
+            </Route>
+            <ProtectedRoute isAuth={isAuth} path="/menu" component={Menu}></ProtectedRoute>
             <ProtectedRoute
               isAuth={isAuth}
               exact
               path="/restaurants"
-              component={Restaurant}
+              component={Restaurants}
             ></ProtectedRoute>
           </Switch>
         </Router>

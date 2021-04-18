@@ -1,18 +1,9 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import menuReducer from "../features/menu/menuSlice";
-import loginReducer from "../features/login/loginSLice";
+import loginReducer from "../features/login/loginSlice";
 import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
-
-// const store = configureStore({
-//   reducer: {
-//     menu: menuReducer,
-//     auth: loginReducer,
-//   },
-// });
-
-// export default store;
 
 const reducers = combineReducers({
   menu: menuReducer,
@@ -22,7 +13,7 @@ const reducers = combineReducers({
 const persistConfig = {
   key: "primary",
   storage,
-  whitelist: ["menu", "login"],
+  whitelist: ["auth"],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

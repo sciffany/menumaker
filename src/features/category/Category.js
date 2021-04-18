@@ -1,11 +1,14 @@
 import { Food } from "../food/Food";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addFood } from "../menu/menuSlice";
 import { addFoodBackend } from "./categoryService";
 import { message } from "antd";
+import { selectRestaurant } from "../menu/menuSlice";
 
 export function Category({ category, categoryIndex }) {
+  const restaurant = useSelector(selectRestaurant);
+
   const [newFood, setNewFood] = useState("");
   const [newUrl, setNewUrl] = useState("");
   const [newPrice, setNewPrice] = useState("");
@@ -48,6 +51,7 @@ export function Category({ category, categoryIndex }) {
               url: newUrl,
               category: category.name,
               price: newPrice,
+              restaurant,
             });
 
             message.info(status);

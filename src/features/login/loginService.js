@@ -19,6 +19,6 @@ export async function loginBackend(payload) {
       return status.data.token;
     }
   } catch (err) {
-    console.log(err);
+    message.info("Email address or password is incorrect");
   }
 }
